@@ -1,0 +1,108 @@
+﻿<Metro:MetroContentControl x:Class="RecordsViewerClient.Controls.SimpleControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:local="clr-namespace:RecordsViewerClient.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="719" d:DesignWidth="1246">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Border BorderThickness="1" BorderBrush="Silver" Grid.Column="0" Grid.Row="0" Background="#FF31342D">
+            <DockPanel>
+                <StackPanel>
+                    <DockPanel Margin="20,20,0,0">
+                        <Label Content="С" Width="32" Foreground="White" FontWeight="Bold" FontSize="15" Margin="70,0,0,0"></Label>
+                        <DatePicker FontSize="15" Width="156"></DatePicker>
+                        <TextBox Text="00.00"   FontSize="15" VerticalAlignment="Top" Margin="0,0,0,0" Width="48"></TextBox>
+                    </DockPanel>
+                    <DockPanel  Margin="20,5,0,0">
+                        <Label Content="ПО" Width="41" Foreground="White" FontSize="15" FontWeight="Bold" Margin="60,0,0,0"></Label>
+                        <DatePicker FontSize="15" Width="158"></DatePicker>
+                        <TextBox Text="23.59" FontSize="15"  Margin="0,0,0,0" Width="49"></TextBox>
+                    </DockPanel>
+                </StackPanel>
+                <StackPanel>
+                    <DockPanel Margin="0,20,0,0">
+                        <Label Content="ГРУЗ:" Foreground="White" FontSize="15" Margin="60,0,0,0" HorizontalAlignment="Right"
+                           FontWeight="Bold" RenderTransformOrigin="0.659,0.429" Width="52"></Label>
+                        <ComboBox FontSize="15" Width="204"></ComboBox>
+                    </DockPanel>
+                    <DockPanel Margin="0,10,0,0">
+                        <Label Content="ТИП ГРУЗА:" Foreground="White" FontSize="15" HorizontalAlignment="Center" Margin="13,0,0,0"
+                               FontWeight="Bold" Width="100" ></Label>
+                        <ComboBox  FontSize="15" Width="204"></ComboBox>
+                    </DockPanel>
+                </StackPanel>
+                <StackPanel Margin="10,0,0,0">
+                    <DockPanel Margin="0,20,0,0">
+                        <Label Content="КОНТРАГЕНТ:" Foreground="White" FontSize="15" Margin="3,0,0,0" HorizontalAlignment="Right"
+                           FontWeight="Bold" RenderTransformOrigin="0.659,0.429" Width="109"></Label>
+                        <ComboBox FontSize="15" Width="204"></ComboBox>
+                    </DockPanel>
+                    <StackPanel Margin="200,0,0,0">
+                        <CheckBox Content="Платформа №1" Foreground="White" FontSize="15" FontWeight="Bold" Margin="5,10,50,0" ></CheckBox>
+                        <CheckBox Content="Платформа №2" Foreground="White" FontSize="15" FontWeight="Bold" Margin="5,5,50,5" ></CheckBox>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Margin="0,0,0,0">
+                    <Button Content="ОТЧЕТ" FontSize="15" FontWeight="Bold" Margin="0,40,20,0" Foreground="White" 
+                           BorderBrush="#FF4CB451" Height="42" Width="106">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF319314" Offset="0"/>
+                                <GradientStop Color="#FF2C8D0F" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="0" BorderBrush="Silver" BorderThickness="1" >
+
+            <DataGrid FontSize="15" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" Margin="0,-1,-1,-1">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="id" Visibility="Hidden"></DataGridTextColumn>
+                    <DataGridTextColumn Header="№"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Дата 1 взв."></DataGridTextColumn>
+                    <DataGridTextColumn Header="Время 1 взв."></DataGridTextColumn>
+                    <DataGridTextColumn Header="Вес 1 взв."></DataGridTextColumn>
+                    <DataGridTextColumn Header="Дата 2 взв."></DataGridTextColumn>
+                    <DataGridTextColumn Header="Время 2 взв."></DataGridTextColumn>
+                    <DataGridTextColumn Header="Вес 2 взв."></DataGridTextColumn>
+                    <DataGridTextColumn Header="№ Накладной"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Дата накладной"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Номер ТС"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Тип ТС"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Модель ТС"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Номер прицепа"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Тип прицепа"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Модель прицепа"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Водитель"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Груз"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Нетто"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Контрагент"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Перевозчик"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Тип операции"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Склад"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Место размещения"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Склад назначения"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Фонд"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Весовая 1 взв"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Весовая 2 взв."></DataGridTextColumn>
+                    <DataGridTextColumn Header="Ручн. ввод 1 взв."></DataGridTextColumn>
+                    <DataGridTextColumn Header="Ручн. ввод 2 взв."></DataGridTextColumn>
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </Border>
+    </Grid>
+</Metro:MetroContentControl>

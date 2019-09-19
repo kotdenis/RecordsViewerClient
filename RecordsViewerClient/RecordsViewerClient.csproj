@@ -64,6 +64,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\AxleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ConnectionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ExtendedControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SelectorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SimpleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\WeighingReportControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -71,6 +95,24 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\AxleControl.xaml.cs">
+      <DependentUpon>AxleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ConnectionControl.xaml.cs">
+      <DependentUpon>ConnectionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ExtendedControl.xaml.cs">
+      <DependentUpon>ExtendedControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SelectorControl.xaml.cs">
+      <DependentUpon>SelectorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SimpleControl.xaml.cs">
+      <DependentUpon>SimpleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WeighingReportControl.xaml.cs">
+      <DependentUpon>WeighingReportControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -103,6 +145,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\512x512.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
