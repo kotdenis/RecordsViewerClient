@@ -4,10 +4,94 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:Controls="clr-namespace:RecordsViewerClient.Controls"
         xmlns:local="clr-namespace:RecordsViewerClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1200">
+        Title="Серевер отчетов" Height="700" Width="1200">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding FormClosingCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Metro:MetroWindow.Resources>
+        <!--<Controls:WeighingReportControl Height="655" Margin="0,0,5,0" x:Key="WJC"/>
+        <Controls:SimpleControl Height="656" Margin="0,0,9,0" x:Key="SC"/>-->
+        <DataTemplate x:Key="WeightJournal">
+            <Border BorderBrush="Black" BorderThickness="1" Width="1192" >
+                <Controls:WeighingReportControl Height="655" Margin="0,0,5,0" />
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="ExtendedJournal">
+            <Border BorderBrush="Black" BorderThickness="1" Width="1192" >
+                <Controls:ExtendedControl Height="649" Margin="-13,0,9,0"/>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="CargoJournal">
+            <Border BorderBrush="Black" BorderThickness="1" Width="1192" >
+                <Controls:CargoControl Height="656" Margin="0,0,9,0"/>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="CargoCommonJournal">
+            <Border BorderBrush="Black" BorderThickness="1" Width="1192" >
+                <Controls:CargoCommonControl Height="656" Margin="0,0,9,0" />
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="CounterpartyJournal">
+            <Border BorderBrush="Black" BorderThickness="1" Width="1192" >
+                <Controls:SimpleCounterpartyControl Height="656" Margin="0,0,9,0"/>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="CarrierJournal">
+            <Border BorderBrush="Black" BorderThickness="1" Width="1192" >
+                <Controls:CarrierControl1 Height="656" Margin="0,0,9,0"/>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="CarrierCommonJournal">
+            <Border BorderBrush="Black" BorderThickness="1" Width="1192" >
+                <Controls:CarrierCommonControl Height="656" Margin="0,0,9,0"/>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="ExtendedDriverJournal">
+            <Border BorderBrush="Black" BorderThickness="1" Width="1192" >
+                <Controls:ExtendedDriverControl Height="649" Margin="-13,0,9,0"/>
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="AxleJournal">
+            <Border BorderBrush="Black" BorderThickness="1" Width="1192" >
+                <Controls:AxleControl Margin="3,0,14,0" Height="655"/>
+            </Border>
+        </DataTemplate>
+        <Style x:Key="JournalStyle" TargetType="ContentPresenter">
+            <Setter Property="ContentTemplate" Value="{StaticResource WeightJournal}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ControlsVisible[0].IsExtendedJounal}" Value="True">
+                    <Setter Property="ContentTemplate"  Value="{StaticResource ExtendedJournal}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ControlsVisible[0].IsCargoJounal}" Value="True">
+                    <Setter Property="ContentTemplate"  Value="{StaticResource CargoJournal}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ControlsVisible[0].IsCargoCommonJounal}" Value="True">
+                    <Setter Property="ContentTemplate"  Value="{StaticResource CargoCommonJournal}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ControlsVisible[0].IsSimpleCounterparty}" Value="True">
+                    <Setter Property="ContentTemplate"  Value="{StaticResource CounterpartyJournal}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ControlsVisible[0].IsCarrierJounal}" Value="True">
+                    <Setter Property="ContentTemplate"  Value="{StaticResource CarrierJournal}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ControlsVisible[0].IsCarrierCommonJounal}" Value="True">
+                    <Setter Property="ContentTemplate"  Value="{StaticResource CarrierCommonJournal}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ControlsVisible[0].IsDriverExtendedJounal}" Value="True">
+                    <Setter Property="ContentTemplate"  Value="{StaticResource ExtendedDriverJournal}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ControlsVisible[0].IsAxleJournal}" Value="True">
+                    <Setter Property="ContentTemplate"  Value="{StaticResource AxleJournal}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Metro:MetroWindow.Resources>
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -33,22 +117,17 @@
                     <GradientStop Color="#FF8D6D6D" Offset="1"/>
                 </LinearGradientBrush>
             </Viewbox.OpacityMask>
-            <Border BorderBrush="Black" BorderThickness="1" Width="1192">
-                <!--<Controls:WeighingReportControl Height="719" Margin="-40,0,-1,0"/>-->
-                <!--<Controls:ExtendedControl Height="649" Margin="-13,0,9,0"></Controls:ExtendedControl>-->
-                <!--<Controls:SimpleControl Height="656" Margin="0,0,9,0"></Controls:SimpleControl>-->
-                <Controls:AxleControl Margin="3,0,14,0" Height="655"></Controls:AxleControl>
-            </Border>
+            <ContentPresenter Style="{StaticResource JournalStyle}" Content="{Binding}"/>
+            
         </Viewbox>
-        <Viewbox Grid.Column="0" Margin="10,0,5,0" Grid.Row="1" Grid.RowSpan="2">
+        <Viewbox Grid.Column="0" Margin="10,105,5,0" Grid.RowSpan="3">
             <Border BorderBrush="Black" BorderThickness="1" Height="638">
-                <Controls:SelectorControl Width="190" Margin="0,-1,0,-21"/>
+                <Controls:SelectorControl Width="213" Margin="0,-1,0,-4"/>
             </Border>
         </Viewbox>
         <Viewbox Grid.Column="0" Margin="10,0,5,0" Grid.Row="0" Grid.ColumnSpan="2">
-            <Border BorderBrush="Black" BorderThickness="1">
-                <Controls:ConnectionControl Height="114"/>
-            </Border>
+
+            <Controls:ConnectionControl Height="114"/>
         </Viewbox>
     </Grid>
 </Metro:MetroWindow>

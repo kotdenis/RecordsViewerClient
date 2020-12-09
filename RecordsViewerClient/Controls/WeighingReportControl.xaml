@@ -3,10 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:Metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:converter="clr-namespace:RecordsViewerClient.Converter"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:RecordsViewerClient.Controls"
+             xmlns:viewHelp="clr-namespace:RecordsViewerClient.ViewHelpModels"
              mc:Ignorable="d" 
-             d:DesignHeight="719" d:DesignWidth="1246">
+             d:DesignHeight="655" d:DesignWidth="1200">
+    <Metro:MetroContentControl.Resources>
+        <converter:DateConverter x:Key="dateConverter"/>
+        <converter:TimeConverter x:Key="timeConverter"/>
+        <converter:BoolConverter x:Key="boolConverter"/>
+        <converter:ImageConverter x:Key="imageConverter"/>
+        <viewHelp:ComboBoxCollections x:Key="Combos"/>
+    </Metro:MetroContentControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.3*"></RowDefinition>
@@ -22,42 +32,58 @@
                 <StackPanel>
                     <Label Content="Фото со взв. №" Foreground="White" FontSize="15" Margin="30,20,5,5" FontWeight="Bold"></Label>
                     <DockPanel Grid.Row="2" Grid.Column="0" Grid.RowSpan="2">
-                        <Button Content="1" Foreground="White" FontWeight="Bold" FontSize="15"  Height="Auto" Margin="25,0,10,0" Width="50" Background="#FF30B014"/>
-                        <Button Content="2" Foreground="White" FontWeight="Bold" FontSize="15"  Height="Auto"  Width="50" Background="#FF30B014"/>
+                        <Button Content="1" Foreground="White" FontWeight="Bold" FontSize="15"  Height="Auto" Margin="25,0,10,0" 
+                                Width="50" Background="#FF30B014" Command="{Binding GetWeighNumberCommand}" CommandParameter="1"/>
+                        <Button Content="2" Foreground="White" FontWeight="Bold" FontSize="15"  Height="Auto"  
+                                Width="50" Background="#FF30B014" Command="{Binding GetWeighNumberCommand}" CommandParameter="2"/>
                     </DockPanel>
                 </StackPanel>
-                <StackPanel Margin="10,0,0,0" Width="262">
+                <StackPanel Margin="10,0,0,0" Width="266">
                     <DockPanel Margin="20,20,0,0">
                         <Label Content="С" Width="24" Foreground="White" FontWeight="Bold" FontSize="15" Margin="10,0,0,0"></Label>
-                        <DatePicker FontSize="15" Width="130"></DatePicker>
-                        <TextBox Text="00.00"   FontSize="15" VerticalAlignment="Top" Margin="0,0,30,0" Width="51"></TextBox>
+                        <DatePicker FontSize="15" Width="130" Text="{Binding From, Mode=TwoWay, Converter={StaticResource dateConverter}}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectedDateChanged">
+                                    <i:InvokeCommandAction Command="{Binding GetFilterDatasForWeightJournalCommend}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </DatePicker>
+                        <TextBox Text="00.00" IsReadOnly="True"  FontSize="15" VerticalAlignment="Top" Margin="0,0,30,0" Width="51"></TextBox>
                     </DockPanel>
                     <DockPanel  Margin="20,5,0,0">
                         <Label Content="ПО" Width="33" Foreground="White" FontSize="15" FontWeight="Bold"></Label>
-                        <DatePicker FontSize="15" Width="131"></DatePicker>
-                        <TextBox Text="23.59" FontSize="15"  Margin="0,0,30,0" Width="54"></TextBox>
+                        <DatePicker FontSize="15" Width="130" Text="{Binding To, Mode=TwoWay, Converter={StaticResource dateConverter}}"></DatePicker>
+                        <TextBox Text="23.59" FontSize="15" IsReadOnly="True"  Margin="0,0,30,0" Width="51"></TextBox>
                     </DockPanel>
                 </StackPanel>
                 <StackPanel Width="318">
                     <DockPanel Margin="0,20,0,0">
-                        <Label Content="ВЕСОВАЯ:" Foreground="White" FontSize="15" Margin="42,0,0,0" HorizontalAlignment="Right"
+                        <Label Content="ВЕСОВАЯ:" Foreground="White" FontSize="15" Margin="45,0,0,0" HorizontalAlignment="Right"
                            FontWeight="Bold" RenderTransformOrigin="0.659,0.429" Width="93"></Label>
-                        <ComboBox FontSize="15" Width="178"></ComboBox>
+                        <ComboBox FontSize="15" Width="178" ItemsSource="{Binding WeiRoomsList}" Text="{Binding WeiRoom, Mode=OneWayToSource}"></ComboBox>
                     </DockPanel>
                     <DockPanel Margin="0,5,0,0">
                         <Label Content="ТИП ОПЕРАЦИИ:" Foreground="White" FontSize="15" HorizontalAlignment="Center" FontWeight="Bold" Width="139" ></Label>
-                        <ComboBox  FontSize="15"></ComboBox>
+                        <ComboBox  FontSize="15"  ItemsSource="{Binding OperationTypeList}" Text="{Binding TypeOperation, Mode=OneWayToSource}"></ComboBox>
                     </DockPanel>
                 </StackPanel>
                 <StackPanel Margin="40,5,0,0" Width="180">
-                    <CheckBox Content="Только ручные" Foreground="White" FontSize="15" FontWeight="Bold" Margin="20,3,0,0" ></CheckBox>
+                    <CheckBox Content="Только ручные" Foreground="White" FontSize="15" FontWeight="Bold" 
+                              Margin="20,3,0,0">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding GetFilterDatasForWeightJournalCommend}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
                     <CheckBox Content="Отмененные" Foreground="White" FontSize="15" FontWeight="Bold" Margin="20,5,0,0" ></CheckBox>
                     <CheckBox Content="Платформа №1" Foreground="White" FontSize="15" FontWeight="Bold" Margin="20,5,0,0" ></CheckBox>
                     <CheckBox Content="Платформа №2" Foreground="White" FontSize="15" FontWeight="Bold" Margin="20,5,0,5" ></CheckBox>
                 </StackPanel>
                 <StackPanel Margin="60,0,30,0" Width="76">
                     <Label Content="Номер ТС" FontSize="15" Foreground="White" Margin="10,0,0,0" FontWeight="Bold" ></Label>
-                    <TextBox Margin="-12,0,-19,5" FontSize="15" Height="24.5" VerticalAlignment="Bottom"></TextBox>
+                    <TextBox Margin="-12,0,-19,5" FontSize="15" Height="24.5" VerticalAlignment="Bottom" 
+                             Text="{Binding Number, Mode=OneWayToSource}"></TextBox>
                     <Button Content="ОТЧЕТ" FontSize="15" FontWeight="Bold" Margin="0,0,-10,0" Foreground="White" 
                            BorderBrush="#FF4CB451" Height="Auto">
                         <Button.Background>
@@ -71,82 +97,113 @@
             </DockPanel>
 
         </Border>
-        <Border Grid.Row="1" Grid.Column="0" BorderBrush="Silver" BorderThickness="1" >
+        <Border Grid.Row="1" Grid.Column="0" BorderBrush="Silver" BorderThickness="1" Margin="0,0,0,4" >
 
-            <DataGrid Height="400" Width="1411" FontSize="15" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible">
-                
+            <DataGrid FontSize="15" ScrollViewer.HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" 
+                      VerticalScrollBarVisibility="Visible" Margin="0,0,-2,3" ItemsSource="{Binding WeightJournalViewModels}" 
+                      SelectedIndex="{Binding Id, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="id" Visibility="Hidden"></DataGridTextColumn>
-                    <DataGridTextColumn Header="№"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Дата 1 взв."></DataGridTextColumn>
-                    <DataGridTextColumn Header="Время 1 взв."></DataGridTextColumn>
-                    <DataGridTextColumn Header="Вес 1 взв."></DataGridTextColumn>
-                    <DataGridTextColumn Header="Дата 2 взв."></DataGridTextColumn>
-                    <DataGridTextColumn Header="Время 2 взв."></DataGridTextColumn>
-                    <DataGridTextColumn Header="Вес 2 взв."></DataGridTextColumn>
-                    <DataGridTextColumn Header="№ Накладной"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Дата накладной"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Номер ТС"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Тип ТС"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Модель ТС"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Номер прицепа"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Тип прицепа"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Модель прицепа"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Водитель"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Груз"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Нетто"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Контрагент"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Перевозчик"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Тип операции"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Склад"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Место размещения"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Склад назначения"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Фонд"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Весовая 1 взв"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Весовая 2 взв."></DataGridTextColumn>
-                    <DataGridTextColumn Header="Ручн. ввод 1 взв."></DataGridTextColumn>
-                    <DataGridTextColumn Header="Ручн. ввод 2 взв."></DataGridTextColumn>
+                    <DataGridTextColumn Header="id" Visibility="Hidden" Binding="{Binding id}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="№" Binding="{Binding Number}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Дата 1 взв." Binding="{Binding DateTimeFirstWeight, Converter={StaticResource dateConverter}}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Время 1 взв." Binding="{Binding DateTimeFirstWeight, Converter={StaticResource timeConverter}}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Вес 1 взв." Binding="{Binding FirstWeight}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Дата 2 взв." Binding="{Binding DateTimeSecondWeight, Converter={StaticResource dateConverter}}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Время 2 взв." Binding="{Binding DateTimeSecondWeight, Converter={StaticResource timeConverter}}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Вес 2 взв." Binding="{Binding SecondWeight}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="№ Накладной" Binding="{Binding NumberInvoice}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Дата накладной" Binding="{Binding DateInvoice, Converter={StaticResource dateConverter}}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Номер ТС" Binding="{Binding TransportNumber}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Тип ТС" Binding="{Binding TypeTransport}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Модель ТС" Binding="{Binding ModelTransport}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Номер прицепа" Binding="{Binding TrailerNumber}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Тип прицепа" Binding="{Binding TypeTrailer}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Модель прицепа" Binding="{Binding ModelTrailer}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Водитель" Binding="{Binding Driver}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Груз" Binding="{Binding Cargo}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Нетто" Binding="{Binding Netto}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Контрагент" Binding="{Binding Counterparty}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Перевозчик" Binding="{Binding Carrier}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Тип операции" Binding="{Binding TypeOperation}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Склад" Binding="{Binding Storage}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Место размещения" Binding="{Binding Placement}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Склад назначения" Binding="{Binding Placement}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Фонд" Binding="{Binding Fund}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Весовая 1 взв" Binding="{Binding WeightRoomFirstWeight}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Весовая 2 взв." Binding="{Binding WeightRoomSecondWeight}"></DataGridTextColumn>
+                    <DataGridCheckBoxColumn Header="Ручн. ввод 1 взв." Binding="{Binding HandleFirstWeight}"></DataGridCheckBoxColumn>
+                    <DataGridCheckBoxColumn Header="Ручн. ввод 2 взв." Binding="{Binding HandleSecondWeight}"></DataGridCheckBoxColumn>
                 </DataGrid.Columns>
-
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding GetCurrentRowIdCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </DataGrid>
         </Border>
 
-        <Border  BorderThickness="1" BorderBrush="Silver" Grid.Row="2" Grid.Column="0">
-            <DockPanel>
-                <Border BorderBrush="Silver" BorderThickness="1" Margin="5,0,0,0" Width="300" >
-                    <StackPanel>
+
+        <Border  Grid.Row="2" Grid.Column="0" BorderThickness="1" BorderBrush="Silver"  >
+            <DockPanel Margin="0,0,13,0"  >
+                <Border BorderBrush="Silver" BorderThickness="1" Margin="25,0,0,4" Width="270" >
+                    <StackPanel >
                         <Label Content="Изображение 1"  FontSize="15" Padding="70,5,5,5" FontWeight="Bold"  
-                               HorizontalAlignment="Center" Foreground="Black" Background="#FFEAAE0E" Width="300"></Label>
-                        <Image Height="135" ></Image>
+                               HorizontalAlignment="Center" Foreground="Black" Background="#FFEAAE0E" Width="270" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding ShowPhotoWindowCommand}" CommandParameter="1"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Label>
+                        <Image Height="145" Source="{Binding Image1, Converter={StaticResource imageConverter}}" Stretch="UniformToFill">
+                            
+                        </Image>
                     </StackPanel>
                 </Border>
 
-                <Border BorderBrush="Silver" BorderThickness="1"   Margin="5,0,0,0" Width="300">
-                    <StackPanel>
-                        <Label Content="Изображение 2" FontSize="15" Padding="70,5,5,5" FontWeight="Bold"  
-                               HorizontalAlignment="Center" Foreground="Black" Background="#FFEAAE0E" Width="300"></Label>
-                        <Image Height="135"></Image>
+                <Border BorderBrush="Silver" BorderThickness="1" Margin="20,0,0,4" Width="270" >
+                    <StackPanel >
+                        <Label Content="Изображение 2"  FontSize="15" Padding="70,5,5,5" FontWeight="Bold"  
+                               HorizontalAlignment="Center" Foreground="Black" Background="#FFEAAE0E" Width="270" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding ShowPhotoWindowCommand}" CommandParameter="2"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Label>
+                        <Image Height="145" Source="{Binding Image2, Converter={StaticResource imageConverter}}" Stretch="Uniform"></Image>
                     </StackPanel>
-
                 </Border>
-                <Border BorderBrush="Silver" BorderThickness="1"  Margin="5,0,0,0" Width="300">
-                    <StackPanel Margin="0,0,9,0" >
-                        <Label Content="Изображение 3" FontSize="15" Padding="70,5,5,5" FontWeight="Bold"  
-                               HorizontalAlignment="Center" Foreground="Black" Background="#FFEAAE0E" Width="300"></Label>
-                        <Image Height="135" ></Image>
+
+                <Border BorderBrush="Silver" BorderThickness="1" Margin="20,0,0,4" Width="270" >
+                    <StackPanel >
+                        <Label Content="Изображение 3"  FontSize="15" Padding="70,5,5,5" FontWeight="Bold"  
+                               HorizontalAlignment="Center" Foreground="Black" Background="#FFEAAE0E" Width="270" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding ShowPhotoWindowCommand}" CommandParameter="3"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Label>
+                        <Image Height="145" Source="{Binding Image3, Converter={StaticResource imageConverter}}" Stretch="UniformToFill"></Image>
                     </StackPanel>
-
                 </Border>
-                <Border BorderBrush="Silver" BorderThickness="1" Margin="5,0,5,0">
-                    <StackPanel>
-                        <Label Content="Изображение 4" FontSize="15" Padding="70,5,5,5" Foreground="Black" FontWeight="Bold"  
-                               HorizontalAlignment="Center" Background="#FFEAAE0E" Width="300"></Label>
-                        <Image Height="135"></Image>
+                <Border BorderBrush="Silver" BorderThickness="1" Margin="20,0,0,4" Width="270" >
+                    <StackPanel >
+                        <Label Content="Изображение 4"  FontSize="15" Padding="70,5,5,5" FontWeight="Bold"  
+                               HorizontalAlignment="Center" Foreground="Black" Background="#FFEAAE0E" Width="270" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding ShowPhotoWindowCommand}" CommandParameter="4"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Label>
+                        <Image Height="145" Source="{Binding Image4, Converter={StaticResource imageConverter}}" Stretch="Uniform"></Image>
                     </StackPanel>
-
                 </Border>
+
             </DockPanel>
         </Border>
-
     </Grid>
 </Metro:MetroContentControl>

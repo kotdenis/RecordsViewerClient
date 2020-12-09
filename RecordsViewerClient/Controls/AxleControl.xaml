@@ -3,10 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:Metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RecordsViewerClient.Controls"
+             xmlns:converter="clr-namespace:RecordsViewerClient.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="719" d:DesignWidth="1246">
+    <Metro:MetroContentControl.Resources>
+        <converter:DateConverter x:Key="dateConverter"/>
+        <converter:TimeConverter x:Key="timeConverter"/>
+        <converter:BoolConverter x:Key="boolConverter"/>
+    </Metro:MetroContentControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.4*"></RowDefinition>
@@ -21,19 +28,26 @@
                 <StackPanel Margin="20,0,0,0" Width="332">
                     <DockPanel Margin="20,20,0,0">
                         <Label Content="С" Width="32" Foreground="White" FontWeight="Bold" FontSize="15" Margin="70,0,0,0"></Label>
-                        <DatePicker FontSize="15" Width="156"></DatePicker>
+                        <DatePicker FontSize="15" Width="156" Text="{Binding From, Mode=TwoWay, Converter={StaticResource dateConverter}}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectedDateChanged">
+                                    <i:InvokeCommandAction Command="{Binding SendQueryForAxleGridDatasCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </DatePicker>
                         <TextBox Text="00.00"   FontSize="15" VerticalAlignment="Top" Margin="0,0,0,0" Width="48"></TextBox>
                     </DockPanel>
                     <DockPanel  Margin="20,5,0,0">
                         <Label Content="ПО" Width="41" Foreground="White" FontSize="15" FontWeight="Bold" Margin="60,0,0,0"></Label>
-                        <DatePicker FontSize="15" Width="158"></DatePicker>
+                        <DatePicker FontSize="15" Width="158" Text="{Binding To, Mode=TwoWay, Converter={StaticResource dateConverter}}"></DatePicker>
                         <TextBox Text="23.59" FontSize="15"  Margin="0,0,0,0" Width="49"></TextBox>
                     </DockPanel>
                 </StackPanel>
                 <StackPanel>
                     <DockPanel Margin="40,20,0,0">
                     <Label Content="Номер ТС" FontSize="15" Foreground="White" Margin="0,0,0,0" FontWeight="Bold" Width="103" ></Label>
-                    <TextBox Margin="-12,0,-19,5" FontSize="15" Height="24.5" VerticalAlignment="Bottom" Width="146"></TextBox>
+                    <TextBox Margin="-12,0,-19,5" FontSize="15" Height="24.5" VerticalAlignment="Bottom"
+                             Width="146" Text="{Binding Number, Mode=OneWayToSource}"></TextBox>
                     </DockPanel>
                 </StackPanel>
                 <StackPanel Margin="100,0,0,0">
@@ -50,35 +64,43 @@
             </DockPanel>
         </Border>
         <Border Grid.Row="1" Grid.Column="0" BorderBrush="Silver" BorderThickness="1" >
-            <DataGrid FontSize="15" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" Margin="0" RenderTransformOrigin="0.532,0.503">
+            <DataGrid FontSize="15" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" 
+                      Margin="0" RenderTransformOrigin="0.532,0.503" ItemsSource="{Binding AxleReports}" AutoGenerateColumns="False"
+                      SelectedIndex="{Binding AxleId, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="id" Visibility="Hidden"></DataGridTextColumn>
-                    <DataGridTextColumn Header="№"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Дата взв."></DataGridTextColumn>
-                    <DataGridTextColumn Header="Время взв."></DataGridTextColumn>
-                    <DataGridTextColumn Header="Вес взв."></DataGridTextColumn>
-                    <DataGridTextColumn Header="Допустимый ыес"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Тип ТС"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Модель ТС"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Номер ТС"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Тип прицепа"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Модель прицепа"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Номер прицепа"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Водитель"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Ширина"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Высота"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Длина"></DataGridTextColumn>
+                    <DataGridTextColumn Header="id" Visibility="Hidden" Binding="{Binding id}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="№" Binding="{Binding Number}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Дата взв." Binding="{Binding WeightDate, Converter={StaticResource dateConverter}}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Время взв." Binding="{Binding WeightTime, Converter={StaticResource timeConverter}}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Вес взв." Binding="{Binding TotalWeifgt}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Допустимый вес" Binding="{Binding WeightAllowed}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Тип ТС" Binding="{Binding TransportType}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Модель ТС" Binding="{Binding TransportModel}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Номер ТС" Binding="{Binding TransportNumber}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Тип прицепа" Binding="{Binding TrailerType}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Модель прицепа" Binding="{Binding TrailerModel}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Номер прицепа" Binding="{Binding TrailerNumber}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Водитель" Binding="{Binding DriverName}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Ширина" Binding="{Binding Width}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Высота" Binding="{Binding Height}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Длина" Binding="{Binding Length}"></DataGridTextColumn>
                 </DataGrid.Columns>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding GetCurrentAxleRowIdCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </DataGrid>
         </Border>
         <Border Grid.Row="2" Grid.Column="0" BorderBrush="Silver" BorderThickness="1" >
-            <DataGrid FontSize="15" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" Margin="0" RenderTransformOrigin="0.532,0.503">
+            <DataGrid FontSize="15" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" 
+                      Margin="0" RenderTransformOrigin="0.532,0.503" ItemsSource="{Binding TransportAxleWeightList}" AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="№" Visibility="Hidden"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Подвеска"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Скатность"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Межосевое"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Вес на ось в т. "></DataGridTextColumn>
+                    <DataGridTextColumn Header="№" Binding="{Binding Number}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Подвеска" Binding="{Binding CarSuspension}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Скатность" Binding="{Binding WheelPitch}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Межосевое" Binding="{Binding InterAxleDistance}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Вес на ось в т. " Binding="{Binding WeightOnAxle}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Допустимые в т."></DataGridTextColumn>
                     <DataGridTextColumn Header="Группа"></DataGridTextColumn>
                     <DataGridTextColumn Header="Группа факт. в т."></DataGridTextColumn>

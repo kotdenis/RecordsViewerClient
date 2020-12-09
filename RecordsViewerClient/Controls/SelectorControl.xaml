@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RecordsViewerClient.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="700" Width="210">
+             d:DesignHeight="655" Width="210">
     <Grid>
-        <Border  BorderBrush="Black" BorderThickness="1" Width="150" Margin="0,0,-1,-36">
+        <Border  >
 
-            <StackPanel Width="143.163">
-                <Button  Margin="0,5" Height="60">
+            <StackPanel Margin="18,5,13,5">
+                <Button  Margin="0,5" Height="60" Command="{Binding ShowWJGridCommand}" CommandParameter="0">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FF30B81B" Offset="0"/>
@@ -19,7 +19,7 @@
                     </Button.Background>
                     <TextBlock TextAlignment="Center" FontSize="15" Width="110"> Журнал <LineBreak/> взвешиваний</TextBlock>
                 </Button>
-                <Button Height="60">
+                <Button Height="60" Command="{Binding ShowGridCommand}" CommandParameter="1">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FF30B81B" Offset="0"/>
@@ -28,7 +28,7 @@
                     </Button.Background>
                     <TextBlock TextAlignment="Center" FontSize="15" Width="102"> Взвешивание <LineBreak/> по складам</TextBlock>
                 </Button>
-                <Button Margin="0,2,0,0" Height="60">
+                <Button Margin="0,2,0,0" Height="60" Command="{Binding ShowGridCommand}" CommandParameter="2">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FF30B81B" Offset="0"/>
@@ -37,7 +37,7 @@
                     </Button.Background>
                     <TextBlock TextAlignment="Center" FontSize="15" Width="104"> Взвешивание <LineBreak/> по грузам</TextBlock>
                 </Button>
-                <Button Margin="0,2,0,0" Height="60">
+                <Button Margin="0,2,0,0" Height="60" Command="{Binding ShowGridCommand}" CommandParameter="3">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FF30B81B" Offset="0"/>
@@ -46,7 +46,7 @@
                     </Button.Background>
                     <TextBlock TextAlignment="Center" FontSize="15" Width="75.148"> Общий <LineBreak/> по грузам</TextBlock>
                 </Button>
-                <Button  Margin="0,2,0,0" Height="60">
+                <Button  Margin="0,2,0,0" Height="60" Command="{Binding ShowGridCommand}" CommandParameter="4">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FF30B81B" Offset="0"/>
@@ -55,7 +55,7 @@
                     </Button.Background>
                     <TextBlock TextAlignment="Center" FontSize="15" Width="133"> Взвешивание <LineBreak/> по контрагентам</TextBlock>
                 </Button>
-                <Button  Margin="0,2,0,0" Height="60">
+                <Button  Margin="0,2,0,0" Height="60" Command="{Binding ShowGridCommand}" CommandParameter="5">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FF30B81B" Offset="0"/>
@@ -64,7 +64,7 @@
                     </Button.Background>
                     <TextBlock TextAlignment="Center" FontSize="15" Width="133"> Взвешивание <LineBreak/> по перевозчикам</TextBlock>
                 </Button>
-                <Button  Margin="0,2,0,0" Height="60">
+                <Button  Margin="0,2,0,0" Height="60" Command="{Binding ShowGridCommand}" CommandParameter="6">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FF30B81B" Offset="0"/>
@@ -73,7 +73,7 @@
                     </Button.Background>
                     <TextBlock TextAlignment="Center" FontSize="15" Width="143"> Общий <LineBreak/> по перевозчикам</TextBlock>
                 </Button>
-                <Button  Margin="0,2,0,0" Height="60">
+                <Button  Margin="0,2,0,0" Height="60" Command="{Binding ShowGridCommand}" CommandParameter="7">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FF30B81B" Offset="0"/>
@@ -82,7 +82,7 @@
                     </Button.Background>
                     <TextBlock TextAlignment="Center" FontSize="15" Width="114"> По водителям</TextBlock>
                 </Button>
-                <Button  Margin="0,2,0,5" Height="60">
+                <Button  Margin="0,2,0,5" Height="60" Command="{Binding ShowGridCommand}" CommandParameter="8">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FF30B81B" Offset="0"/>
@@ -91,15 +91,15 @@
                     </Button.Background>
                     <TextBlock TextAlignment="Center" FontSize="15" Width="75.148"> По осям</TextBlock>
                 </Button>
-                    <Button   Height="60">
-                        <Button.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FF30B81B" Offset="0"/>
-                                <GradientStop Color="#FF334031" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Button.Background>
-                        <TextBlock TextAlignment="Center" FontSize="15" Width="75.148"> Аудит</TextBlock>
-                    </Button>
+                <Button   Height="60">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF30B81B" Offset="0"/>
+                            <GradientStop Color="#FF334031" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <TextBlock TextAlignment="Center" FontSize="15" Width="75.148"> Аудит</TextBlock>
+                </Button>
             </StackPanel>
         </Border>
     </Grid>

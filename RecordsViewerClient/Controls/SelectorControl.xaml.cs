@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RecordsViewerClient.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,14 +13,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Unity;
 
 namespace RecordsViewerClient.Controls
 {
     /// <summary>
     /// Логика взаимодействия для SelectorControl.xaml
     /// </summary>
-    public partial class SelectorControl : UserControl
+    public partial class SelectorControl : UserControl, IViews
     {
+        [Dependency]
+        public IViews views
+        {
+            set { DataContext = value; }
+        }
         public SelectorControl()
         {
             InitializeComponent();

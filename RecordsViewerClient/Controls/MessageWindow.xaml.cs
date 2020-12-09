@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RecordsViewerClient.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,17 +11,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Unity;
 
 namespace RecordsViewerClient.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для SimpleControl.xaml
+    /// Логика взаимодействия для MessageWindow.xaml
     /// </summary>
-    public partial class SimpleControl : MahApps.Metro.Controls.MetroContentControl
+    public partial class MessageWindow : MahApps.Metro.Controls.MetroWindow
     {
-        public SimpleControl()
+        [Dependency]
+        public MessageView Views
+        {
+            set { DataContext = value; }
+        }
+
+        public MessageWindow()
         {
             InitializeComponent();
         }

@@ -35,16 +35,63 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport, Version=2018.2.0.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Desktop\GitWeiApp\weighingapp\WeightingApp\WeightingApp\bin\Debug\FastReport.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Bars, Version=2018.2.0.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Desktop\GitWeiApp\weighingapp\WeightingApp\WeightingApp\bin\Debug\FastReport.Bars.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Editor, Version=2018.2.0.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Desktop\GitWeiApp\weighingapp\WeightingApp\WeightingApp\bin\Debug\FastReport.Editor.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net47\MahApps.Metro.dll</HintPath>
     </Reference>
+    <Reference Include="MetroFramework">
+      <HintPath>..\..\..\..\Documents\weighingapp\WeightingApp\WeightingApp\SOURCE\MetroFramework\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design">
+      <HintPath>..\..\..\..\Documents\weighingapp\WeightingApp\WeightingApp\SOURCE\MetroFramework\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts">
+      <HintPath>..\..\..\..\Documents\weighingapp\WeightingApp\WeightingApp\SOURCE\MetroFramework\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Client, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Client.2.4.1\lib\net45\Microsoft.AspNet.SignalR.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=7.2.0.1367, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.7.2.0.1367\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=7.2.0.1367, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.7.2.0.1367\lib\net45\Prism.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\Prism.Wpf.7.2.0.1367\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,6 +102,12 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Unity.Abstractions, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.1\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.1\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -64,7 +117,95 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\CarrierCommonControl.xaml.cs">
+      <DependentUpon>CarrierCommonControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CarrierControl1.xaml.cs">
+      <DependentUpon>CarrierControl1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ExtendedDriverControl.xaml.cs">
+      <DependentUpon>ExtendedDriverControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MessageWindow.xaml.cs">
+      <DependentUpon>MessageWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PhotoWindow.xaml.cs">
+      <DependentUpon>PhotoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SimpleCounterpartyControl.xaml.cs">
+      <DependentUpon>SimpleCounterpartyControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CargoCommonControl.xaml.cs">
+      <DependentUpon>CargoCommonControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converter\BoolConverter.cs" />
+    <Compile Include="Converter\DateConverter.cs" />
+    <Compile Include="Converter\FormatConverter.cs" />
+    <Compile Include="Converter\ImageConverter.cs" />
+    <Compile Include="Converter\TimeConverter.cs" />
+    <Compile Include="Enums\EnumMessage.cs" />
+    <Compile Include="FastReports\AuditWeightReportCS.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FastReports\CargoWeightReportCommonCS.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FastReports\CargoWeightReportTwoCS.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FastReports\CarrierWeightReportCommonCS.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FastReports\CarrierWeightReportCS.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FastReports\CounterpartyWeightReportCS.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FastReports\DriverFastReportCS.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FastReports\StorageWeightReportCS.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FastReports\WeightFullReportCS.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Models\OnEachAxleModel.cs" />
+    <Compile Include="ReportService\ReportFastExecuter.cs" />
+    <Compile Include="ReportService\ReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportService\ReportForm.Designer.cs">
+      <DependentUpon>ReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportService\TableConverter.cs" />
+    <Compile Include="Service\AxleService.cs" />
+    <Compile Include="Service\ClientService.cs" />
+    <Compile Include="Service\IClientService.cs" />
+    <Compile Include="ViewHelpModels\ComboBoxCollections.cs" />
+    <Compile Include="ViewHelpModels\ControlSelectModel.cs" />
+    <Compile Include="ViewHelpModels\ExtendedGridModels.cs" />
+    <Compile Include="ViewHelpModels\GridDataHelper.cs" />
+    <Compile Include="ViewHelpModels\GridModels.cs" />
+    <Compile Include="ViewHelpModels\WeightJournalModels.cs" />
+    <Compile Include="ViewModels\IMessageSender.cs" />
+    <Compile Include="ViewModels\IPhotoes.cs" />
+    <Compile Include="ViewModels\IViews.cs" />
+    <Compile Include="ViewModels\MessageSender.cs" />
+    <Compile Include="ViewModels\MessageView.cs" />
+    <Compile Include="ViewModels\Photoes.cs" />
+    <Compile Include="ViewModels\PhotoView.cs" />
+    <Compile Include="ViewModels\ViewMain.cs" />
     <Page Include="Controls\AxleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CarrierCommonControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CarrierControl1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -76,11 +217,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ExtendedDriverControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MessageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PhotoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\SelectorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\SimpleControl.xaml">
+    <Page Include="Controls\CargoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SimpleCounterpartyControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CargoCommonControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -108,18 +269,41 @@
     <Compile Include="Controls\SelectorControl.xaml.cs">
       <DependentUpon>SelectorControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SimpleControl.xaml.cs">
-      <DependentUpon>SimpleControl.xaml</DependentUpon>
+    <Compile Include="Controls\CargoControl.xaml.cs">
+      <DependentUpon>CargoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\WeighingReportControl.xaml.cs">
       <DependentUpon>WeighingReportControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Filters\RegWeightExtendedFilter.cs" />
+    <Compile Include="Filters\RegWeightFilter.cs" />
+    <Compile Include="Filters\ReportGridFilter.cs" />
+    <Compile Include="Filters\SimpleRegWeightFilter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\AuditWeighing.cs" />
+    <Compile Include="Models\AxleReportViewData.cs" />
+    <Compile Include="Models\FirstWeightJournalViewModel.cs" />
+    <Compile Include="Models\FirstWeightViewModel.cs" />
+    <Compile Include="Models\FullWeightViewModel.cs" />
+    <Compile Include="Models\GroupAccessPermission.cs" />
+    <Compile Include="Models\InvoiceTorg12ShortData.cs" />
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\RegisterTransportJournalViewModel.cs" />
+    <Compile Include="Models\RegisterTransportViewModel.cs" />
+    <Compile Include="Models\ReportExtendedGridData.cs" />
+    <Compile Include="Models\ReportGridData.cs" />
+    <Compile Include="Models\SettingApp.cs" />
+    <Compile Include="Models\TrailerAxleWeightViewModel.cs" />
+    <Compile Include="Models\TransportAxleWeightViewModel.cs" />
+    <Compile Include="Models\TransportTrailerModelsView.cs" />
+    <Compile Include="Models\TTN_1T_ShortData.cs" />
+    <Compile Include="Models\WeighingRoomSettingsModel.cs" />
+    <Compile Include="Models\WeightJournalViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -148,6 +332,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Controls\512x512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\cydia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\danger.png" />
+    <Resource Include="Controls\no.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

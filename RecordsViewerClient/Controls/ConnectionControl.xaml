@@ -3,16 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:helpModel="clr-namespace:RecordsViewerClient.ViewHelpModels"
+             xmlns:mainiew="clr-namespace:RecordsViewerClient.ViewModels"
              xmlns:local="clr-namespace:RecordsViewerClient.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="110" d:DesignWidth="1250">
+    
     <UserControl.Resources>
+        
         <Image Source="512x512.png" x:Key="connect"/>
+        <Image Source="cydia.png" x:Key="save"/>
     </UserControl.Resources>
     <Grid>
-        <Border BorderThickness="1" BorderBrush="Black">
-        <DockPanel Margin="0,0,0,-54">
-            <Label Content="Клиент 'Сервер отчетов'" FontSize="50" FontWeight="Bold" Margin="20,0,10,20" Width="859">
+
+        <DockPanel Margin="0,0,0,0">
+            <Label Content="Клиент 'Сервер отчетов'" FontSize="50" FontWeight="Bold" Margin="20,0,10,20" Width="794">
                 <Label.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF32810D" Offset="0.313"/>
@@ -22,19 +27,29 @@
             </Label>
             <StackPanel Width="181">
                 <Label Content="IP адрес" Foreground="Yellow" FontSize="12" FontWeight="Bold" ></Label>
-                <TextBox FontSize="12"></TextBox>
+                <TextBox FontSize="12"  Text="{Binding IP}"></TextBox>
                 <Label Content="Порт" Foreground="Yellow" FontSize="12" FontWeight="Bold" ></Label>
-                <TextBox FontSize="12"></TextBox>
+                <TextBox FontSize="12"  Text="{Binding Port, Mode=TwoWay}"></TextBox>
             </StackPanel>
-            <Button Width="60" Content="{StaticResource connect}" Margin="20,30,0,75">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black" Offset="0"/>
-                        <GradientStop Color="White" Offset="1"/>
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
+            <StackPanel>
+                <Button Width="65" Content="{StaticResource connect}" 
+                        Margin="20,20,20,0" Height="40"   Command="{Binding ConnectServerCommand}">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button Width="65" Content="{StaticResource save}" Margin="20,10,20,0" Command="{Binding SaveSattingsCommand}" Height="40">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+            </StackPanel>
         </DockPanel>
-        </Border>
     </Grid>
 </UserControl>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RecordsViewerClient.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Unity;
 
 namespace RecordsViewerClient
 {
@@ -20,6 +22,12 @@ namespace RecordsViewerClient
     /// </summary>
     public partial class MainWindow : MahApps.Metro.Controls.MetroWindow
     {
+        [Dependency]
+        public IViews Views
+        {
+            set { DataContext = value; }
+        }
+
         public MainWindow()
         {
             InitializeComponent();

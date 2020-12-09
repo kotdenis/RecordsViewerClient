@@ -1,0 +1,134 @@
+﻿<Metro:MetroContentControl x:Class="RecordsViewerClient.Controls.ExtendedDriverControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:converter="clr-namespace:RecordsViewerClient.Converter"
+             xmlns:local="clr-namespace:RecordsViewerClient.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="719" d:DesignWidth="1246">
+    <Metro:MetroContentControl.Resources>
+        <converter:DateConverter x:Key="dateConverter"/>
+        <converter:TimeConverter x:Key="timeConverter"/>
+        <converter:BoolConverter x:Key="boolConverter"/>
+    </Metro:MetroContentControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.4*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Border BorderThickness="1" BorderBrush="Silver" Grid.Column="0" Grid.Row="0" Background="#FF31342D">
+            <DockPanel>
+                <StackPanel Margin="20,0,0,0" Width="332">
+                    <DockPanel Margin="20,20,0,0">
+                        <Label Content="С" Width="32" Foreground="White" FontWeight="Bold" FontSize="15" Margin="70,0,0,0"></Label>
+                        <DatePicker FontSize="15" Width="156" Text="{Binding From, Mode=TwoWay, Converter={StaticResource dateConverter}}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectedDateChanged">
+                                    <i:InvokeCommandAction Command="{Binding SendQueryForExtendedGridDatasCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </DatePicker>
+                        <TextBox Text="00.00"   FontSize="15" VerticalAlignment="Top" Margin="0,0,0,0" Width="48"></TextBox>
+                    </DockPanel>
+                    <DockPanel  Margin="20,5,0,0">
+                        <Label Content="ПО" Width="41" Foreground="White" FontSize="15" FontWeight="Bold" Margin="60,0,0,0"></Label>
+                        <DatePicker FontSize="15" Width="158" Text="{Binding To, Mode=TwoWay, Converter={StaticResource dateConverter}}"></DatePicker>
+                        <TextBox Text="23.59" FontSize="15"  Margin="0,0,0,0" Width="49"></TextBox>
+                    </DockPanel>
+                    <DockPanel Margin="0,20,0,0">
+                        <Label Content="СКЛАД:" Foreground="White" FontSize="15" Margin="48,0,0,0" HorizontalAlignment="Right"
+                           FontWeight="Bold" RenderTransformOrigin="0.659,0.429" Width="66"></Label>
+                        <ComboBox FontSize="15" Width="204" ItemsSource="{Binding StoreList}" Text="{Binding Store, Mode=OneWayToSource}"></ComboBox>
+                    </DockPanel>
+                    <DockPanel Margin="0,10,0,0">
+                        <Label Content="МЕСТО РАЗМ.:" Foreground="White" FontSize="15" HorizontalAlignment="Center" FontWeight="Bold" Width="115"  ></Label>
+                        <ComboBox  FontSize="15" Width="204" ItemsSource="{Binding PlacementList}" Text="{Binding Placement, Mode=OneWayToSource}"></ComboBox>
+                    </DockPanel>
+                </StackPanel>
+                <StackPanel Width="317" Margin="50,0,0,0">
+                    <DockPanel Margin="0,20,0,0">
+                        <Label Content="ГРУЗ:" Foreground="White" FontSize="15" Margin="60,0,0,0" HorizontalAlignment="Right"
+                           FontWeight="Bold" RenderTransformOrigin="0.659,0.429" Width="52"></Label>
+                        <ComboBox FontSize="15" Width="204" ItemsSource="{Binding CargoList}" Text="{Binding Cargo, Mode=OneWayToSource}"></ComboBox>
+                    </DockPanel>
+                    <DockPanel Margin="0,10,0,0">
+                        <Label Content="ТИП ГРУЗА:" Foreground="White" FontSize="15" HorizontalAlignment="Center" Margin="13,0,0,0"
+                               FontWeight="Bold" Width="100" ></Label>
+                        <ComboBox  FontSize="15" Width="204" ItemsSource="{Binding CargoTypeList}" Text="{Binding CargoType, Mode=OneWayToSource}"></ComboBox>
+                    </DockPanel>
+                    <DockPanel Margin="0,10,0,0">
+                        <Label Content="КОНТРАГЕНТ:" Foreground="White" FontSize="15" Margin="3,0,0,0" HorizontalAlignment="Right"
+                           FontWeight="Bold" RenderTransformOrigin="0.659,0.429" Width="109"></Label>
+                        <ComboBox FontSize="15" Width="204" ItemsSource="{Binding CounterpartyList}" Text="{Binding Counterparty, Mode=OneWayToSource}"></ComboBox>
+                    </DockPanel>
+                    <DockPanel Margin="0,10,0,0">
+                        <Label Content="ПЕРЕВОЗЧИК:" Foreground="White" FontSize="15" HorizontalAlignment="Center" FontWeight="Bold" Width="111" ></Label>
+                        <ComboBox  FontSize="15" Width="204" ItemsSource="{Binding CarrierList}" Text="{Binding Carrier, Mode=OneWayToSource}"></ComboBox>
+                    </DockPanel>
+                </StackPanel>
+                <StackPanel Width="480" Margin="50,0,0,0">
+                    <DockPanel Margin="0,10,0,0">
+                        <Label Content="ВОДИТЕЛЬ:" Foreground="White" FontSize="15" Margin="40,0,0,0" HorizontalAlignment="Right"
+                           FontWeight="Bold" RenderTransformOrigin="0.659,0.429" Width="96"></Label>
+                        <ComboBox FontSize="15" Width="204" Margin="0,0,135,0" ItemsSource="{Binding DriverList}" Text="{Binding Driver, Mode=OneWayToSource}"></ComboBox>
+                    </DockPanel>
+                    <DockPanel Margin="0,10,0,0">
+                        <Label Content="ТИП ОПЕРАЦИИ:" Foreground="White" FontSize="15" HorizontalAlignment="Center" FontWeight="Bold" Width="136" ></Label>
+                        <ComboBox  FontSize="15" Width="204" Margin="0,0,135,0" ItemsSource="{Binding OperationTypeList}" 
+                                   Text="{Binding TypeOperation, Mode=TwoWay}"></ComboBox>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Content="Номер ТС:" FontSize="15" Foreground="White" Margin="50,10,0,0" FontWeight="Bold" Width="89" ></Label>
+                        <TextBox Margin="0,10,135,0" FontSize="15" Height="24.5" VerticalAlignment="Bottom" Width="206" 
+                                 Text="{Binding Number, Mode=TwoWay}"></TextBox>
+                    </DockPanel>
+                    <DockPanel>
+                        <StackPanel>
+                            <CheckBox Content="Платформа №1" Foreground="White" FontSize="15" FontWeight="Bold" Margin="5,10,50,0" ></CheckBox>
+                            <CheckBox Content="Платформа №2" Foreground="White" FontSize="15" FontWeight="Bold" Margin="5,5,50,5" ></CheckBox>
+                        </StackPanel>
+                        <Button Content="ОТЧЕТ" FontSize="15" FontWeight="Bold" Margin="0,0,100,0" Foreground="White" 
+                           BorderBrush="#FF4CB451" Height="42" Width="103" Command="{Binding SendQueryForFastReportCommand}">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF319314" Offset="0"/>
+                                    <GradientStop Color="#FF2C8D0F" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                    </DockPanel>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="0" BorderBrush="Silver" BorderThickness="1" >
+
+            <DataGrid FontSize="15" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Visible" 
+                      Margin="0" RenderTransformOrigin="0.532,0.503" ItemsSource="{Binding ReportExtendeds}" AutoGenerateColumns="False">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="id" Visibility="Hidden"></DataGridTextColumn>
+                    <DataGridTextColumn Header="№" Binding="{Binding Number}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Номер ТС" Binding="{Binding TransportNumber}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Дата" Binding="{Binding DateTimeSecondWeight, Converter={StaticResource dateConverter}}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Время" Binding="{Binding DateTimeSecondWeight, Converter={StaticResource timeConverter}}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Тип операции" Binding="{Binding TypeOperation}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Нетто" Binding="{Binding Netto}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Груз" Binding="{Binding Cargo}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Тип груза" Binding="{Binding TypeOfCargo}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Перевозчик" Binding="{Binding Carrier}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Контрагент" Binding="{Binding Counterparty}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Склад" Binding="{Binding Storage}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Место размещения" Binding="{Binding Placement}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Водитель" Binding="{Binding Driver}"></DataGridTextColumn>
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </Border>
+    </Grid>
+</Metro:MetroContentControl>
